@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Artifact</string>
+    <string name="str_search_card">搜索卡牌</string>
+    <string name="str_hero">英雄</string>
+</resources>
