@@ -3,6 +3,7 @@ package com.dthfish.artifact.main
 import android.os.Bundle
 import com.dthfish.artifact.R
 import com.dthfish.artifact.base.BaseActivity
+import com.dthfish.artifact.bean.SearchBean
 import com.dthfish.drawer.DrawerFragment
 
 class MainActivity : BaseActivity() {
@@ -23,6 +24,10 @@ class MainActivity : BaseActivity() {
     fun findHeroes(flag: Boolean) {
         mainFragment?.findHeroes(flag)
 
+
+    }
+
+    fun gotoSearch(searchBean: SearchBean) {
 
     }
 

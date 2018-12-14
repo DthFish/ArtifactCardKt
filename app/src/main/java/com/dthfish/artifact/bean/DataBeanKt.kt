@@ -145,12 +145,15 @@ class Card(
 }
 
 class SearchBean {
-    var types: List<String>? = null
-    var colors: List<String>? = null
+    var searchText: String? = null
+    // 一位代表一个类型，和 ui 位置对应
+    //依次 英雄，怪，术，强，兵，甲，命，回
+    var types: BooleanArray = booleanArrayOf(false, false, false, false, false, false, false, false)
+    //依次 红，绿，蓝，黑
+    var colors: BooleanArray = booleanArrayOf(false, false, false, false)
+    //依次 铁，铜，银，金 对应 null,common,uncommon,rare
+    var rarities: BooleanArray = booleanArrayOf(false, false, false, false)
     //颜色 没有就是全部，对物品不影响
     //稀有度 对所有影响
-    //单选 hero
-    //
-
 
 }

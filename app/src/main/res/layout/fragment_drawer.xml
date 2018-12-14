@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:background="@android:color/white"
+            android:scrollbars="none"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -10,13 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:background="#E6E6E6"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="80dp"
-            android:layout_height="80dp"/>
-
         <EditText
+            android:id="@+id/etSearch"
             android:layout_margin="15dp"
             android:lines="1"
             android:hint="@string/str_search_card"
@@ -227,6 +223,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnSearch"
             android:text="@string/str_search"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
