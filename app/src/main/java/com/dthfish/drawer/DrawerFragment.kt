@@ -1,6 +1,7 @@
 package com.dthfish.drawer
 
 import android.os.Bundle
+import android.support.v7.widget.AppCompatCheckedTextView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,9 +30,73 @@ class DrawerFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         ctvHero.setOnClickListener {
-            ctvHero.isChecked = !ctvHero.isChecked
+            (it as AppCompatCheckedTextView).toggle()
             (activity as MainActivity).findHeroes(ctvHero.isChecked)
 
         }
+        ctvMain.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+        }
+
+        ctvCreep.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+
+        }
+        ctvSpell.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+
+
+        }
+        ctvImprovement.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+
+        }
+
+        ctvItem.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+        }
+        ctvWeapon.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+        }
+        ctvArmor.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+        }
+        ctvAccessory.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+        }
+        ctvConsumable.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+        }
+        tvColor.setOnClickListener {
+
+        }
+        ctvRed.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+        }
+        ctvGreen.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+        }
+        ctvBlue.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+        }
+        ctvBlack.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+        }
+        tvRarity.setOnClickListener {
+
+        }
+        ctvIron.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+        }
+        ctvCopper.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+        }
+        ctvSilver.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+        }
+        ctvGold.setOnClickListener {
+            (it as AppCompatCheckedTextView).toggle()
+        }
+
     }
 }

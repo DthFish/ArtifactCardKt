@@ -2,4 +2,24 @@
     <string name="app_name">Artifact</string>
     <string name="str_search_card">搜索卡牌</string>
     <string name="str_hero">英雄</string>
+    <string name="str_main_card">主牌组</string>
+    <string name="str_item">物品</string>
+    <string name="str_search">搜索</string>
+    <string name="str_color">颜色</string>
+    <string name="str_rarity">稀有度</string>
+    <string name="str_creep">怪</string>
+    <string name="str_spell">术</string>
+    <string name="str_improvement">强</string>
+    <string name="str_weapon">兵</string>
+    <string name="str_armor">甲</string>
+    <string name="str_accessory">命</string>
+    <string name="str_consumable">回</string>
+    <string name="str_red">红</string>
+    <string name="str_green">绿</string>
+    <string name="str_blue">蓝</string>
+    <string name="str_black">黑</string>
+    <string name="str_normal">铁</string>
+    <string name="str_common">铜</string>
+    <string name="str_uncommon">银</string>
+    <string name="str_rare">金</string>
 </resources>

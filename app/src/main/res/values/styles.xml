@@ -22,4 +22,29 @@
         <item name="android:activityCloseExitAnimation">@anim/activity_transition_exit_right</item>
     </style>
 
+    <style name="line">
+        <item name="android:layout_height">1px</item>
+        <!--<item name="android:layout_marginLeft">15dp</item>-->
+        <!--<item name="android:layout_marginBottom">10dp</item>-->
+        <item name="android:background">@color/color_line</item>
+        <item name="android:layout_width">match_parent</item>
+        <!--<item name="android:layout_marginStart">15dp</item>-->
+    </style>
+
+    <style name="title_item">
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <style name="sub_type_item">
+        <item name="android:background">@drawable/bg_sub_item</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+    </style>
+
+
 </resources>

@@ -1,21 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:background="@color/transparent_70_black"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <EditText
-        android:hint="@string/str_search_card"
+    <LinearLayout
+        android:orientation="vertical"
+        android:paddingTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
 
-    <android.support.v7.widget.AppCompatCheckedTextView
-        android:id="@+id/ctvHero"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="@string/str_hero"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <ImageView
+            android:background="#E6E6E6"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
 
-</LinearLayout>
+        <EditText
+            android:layout_margin="15dp"
+            android:lines="1"
+            android:hint="@string/str_search_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <android.support.v7.widget.AppCompatCheckedTextView
+            android:id="@+id/ctvHero"
+            style="@style/title_item"
+            android:background="@drawable/bg_title_item"
+            android:text="@string/str_hero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View style="@style/line"/>
+
+
+        <android.support.v7.widget.AppCompatCheckedTextView
+            android:id="@+id/ctvMain"
+            style="@style/title_item"
+            android:background="@drawable/bg_title_item"
+
+            android:text="@string/str_main_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:padding="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                android:id="@+id/ctvCreep"
+                style="@style/sub_type_item"
+                android:text="@string/str_creep"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                android:id="@+id/ctvSpell"
+                android:text="@string/str_spell"
+                style="@style/sub_type_item"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                android:id="@+id/ctvImprovement"
+                android:text="@string/str_improvement"
+                style="@style/sub_type_item"/>
+        </LinearLayout>
+
+        <View style="@style/line"/>
+
+        <android.support.v7.widget.AppCompatCheckedTextView
+            android:id="@+id/ctvItem"
+            style="@style/title_item"
+            android:background="@drawable/bg_title_item"
+            android:text="@string/str_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:padding="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                android:id="@+id/ctvWeapon"
+                style="@style/sub_type_item"
+                android:text="@string/str_weapon"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                android:id="@+id/ctvArmor"
+                android:text="@string/str_armor"
+                style="@style/sub_type_item"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                android:id="@+id/ctvAccessory"
+                android:text="@string/str_accessory"
+                style="@style/sub_type_item"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                android:id="@+id/ctvConsumable"
+                android:text="@string/str_consumable"
+                style="@style/sub_type_item"/>
+        </LinearLayout>
+
+        <View style="@style/line"/>
+
+        <TextView
+            android:id="@+id/tvColor"
+            style="@style/title_item"
+            android:text="@string/str_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:padding="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                style="@style/sub_type_item"
+                android:id="@+id/ctvRed"
+                android:background="@drawable/bg_sub_red_item"
+                android:text="@string/str_red"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                style="@style/sub_type_item"
+                android:id="@+id/ctvGreen"
+                android:text="@string/str_green"
+                android:background="@drawable/bg_sub_green_item"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                style="@style/sub_type_item"
+                android:id="@+id/ctvBlue"
+                android:text="@string/str_blue"
+                android:background="@drawable/bg_sub_blue_item"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                style="@style/sub_type_item"
+                android:id="@+id/ctvBlack"
+                android:background="@drawable/bg_sub_black_item"
+                android:text="@string/str_black"/>
+        </LinearLayout>
+
+        <View style="@style/line"/>
+
+        <TextView
+            android:id="@+id/tvRarity"
+            style="@style/title_item"
+            android:text="@string/str_rarity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:padding="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                style="@style/sub_type_item"
+                android:id="@+id/ctvIron"
+                android:background="@drawable/bg_sub_iron_item"
+                android:text="@string/str_normal"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                style="@style/sub_type_item"
+                android:id="@+id/ctvCopper"
+                android:text="@string/str_common"
+                android:background="@drawable/bg_sub_copper_item"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                style="@style/sub_type_item"
+                android:id="@+id/ctvSilver"
+                android:text="@string/str_uncommon"
+                android:background="@drawable/bg_sub_silver_item"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+
+            <android.support.v7.widget.AppCompatCheckedTextView
+                style="@style/sub_type_item"
+                android:id="@+id/ctvGold"
+                android:background="@drawable/bg_sub_gold_item"
+                android:text="@string/str_rare"/>
+        </LinearLayout>
+
+        <Button
+            android:text="@string/str_search"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</ScrollView>

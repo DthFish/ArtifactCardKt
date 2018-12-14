@@ -17,4 +17,17 @@
     <color name="transparent_70_white">#b3ffffff</color>
     <color name="transparent_90_white">#e5ffffff</color>
 
+    <color name="color_line">#888888</color>
+    <color name="transparent_30_colorPrimary">#4d008577</color>
+
+    <color name="color_main_red">#e5a33248</color>
+    <color name="color_main_green">#e592f555</color>
+    <color name="color_main_blue">#e52850dc</color>
+    <color name="color_main_black">#e5738caa</color>
+
+    <color name="color_iron">#e5ddeff2</color>
+    <color name="color_copper">#e58c724c</color>
+    <color name="color_silver">#e588bec3</color>
+    <color name="color_gold">#e5d9e25a</color>
+
 </resources>
