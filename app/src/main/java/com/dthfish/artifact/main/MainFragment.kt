@@ -14,11 +14,10 @@ import com.dthfish.artifact.base.BaseFragment
 import com.dthfish.artifact.bean.Card
 import com.dthfish.artifact.bean.CardBean
 import com.dthfish.artifact.bean.SearchBean
-import com.dthfish.artifact.common.log
 import com.dthfish.artifact.db.DBManager
 import com.dthfish.artifact.utils.CARD_TYPE_ARRAY
 import com.dthfish.artifact.utils.CardType
-import com.dthfish.artifact.utils.RARITY_TYPE_ARRAY
+import com.dthfish.artifact.utils.RarityType
 import com.dthfish.artifact.utils.SUB_CARD_TYPE_ARRAY
 import com.liaoinstan.springview.container.DefaultFooter
 import com.zhy.adapter.recyclerview.CommonAdapter
@@ -107,10 +106,8 @@ class MainFragment : BaseFragment() {
     }
 
     fun doSearch(searchBean: SearchBean) {
-        var types = mutableListOf<String>()
-        var subTypes = mutableListOf<String>()
-        var colors = mutableListOf<String>()
-        var rarities = mutableListOf<String>()
+        val types = mutableListOf<String>()
+        val subTypes = mutableListOf<String>()
 
         searchBean.types.forEachIndexed { index, b ->
             if (b) {
@@ -122,21 +119,39 @@ class MainFragment : BaseFragment() {
                 subTypes.add(SUB_CARD_TYPE_ARRAY[index])
             }
         }
-
+        var colorConditions = ""
         searchBean.colors.forEachIndexed { index, b ->
             if (b) {
-
-            }
-        }
-        searchBean.rarities.forEachIndexed { index, b ->
-            if (b) {
-                if (index == 0) {
-                    rarities.add("IS NULL")
-                } else {
-                    rarities.add(RARITY_TYPE_ARRAY[index])
+                colorConditions += " OR"
+                when (index) {
+                    0 -> colorConditions += " is_red == 1"
+                    1 -> colorConditions += " is_green == 1"
+                    2 -> colorConditions += " is_blue == 1"
+                    3 -> colorConditions += " is_black == 1"
                 }
             }
         }
+        if (colorConditions.isNotEmpty()) {
+            colorConditions = colorConditions.replaceFirst(" OR", "")
+        }
+
+        var rarityConditions = ""
+        searchBean.rarities.forEachIndexed { index, b ->
+            if (b) {
+                rarityConditions += " OR"
+                when (index) {
+                    0 -> rarityConditions += " rarity IS NULL"
+                    1 -> rarityConditions += " rarity == '${RarityType.COMMON}'"
+                    2 -> rarityConditions += " rarity == '${RarityType.UNCOMMON}'"
+                    3 -> rarityConditions += " rarity == '${RarityType.RARE}'"
+                }
+            }
+        }
+
+        if (rarityConditions.isNotEmpty()) {
+            rarityConditions = rarityConditions.replaceFirst(" OR", "")
+        }
+
         var conditions = ""
         var ignoreSub = false
         if (subTypes.size == 5) {
@@ -163,7 +178,7 @@ class MainFragment : BaseFragment() {
         } else if (types.size == 2 && types.containsAll(listOf(CardType.IMPROVEMENT, CardType.SPELL))) {
             conditions = "(card_type IN ('${CardType.IMPROVEMENT}','${CardType.SPELL}') AND item_def IS NOT NULL)"
 
-        } else if(!types.isEmpty()){
+        } else if (!types.isEmpty()) {
             conditions = "(card_type IN ("
             types.forEach {
                 when (it) {
@@ -183,10 +198,8 @@ class MainFragment : BaseFragment() {
             conditions += " OR (card_type == '${CardType.IMPROVEMENT}' AND item_def IS NOT NULL)"
         }
 
-
-        conditions.log()
         if (!ignoreSub) {
-            if(!conditions.isEmpty()){
+            if (conditions.isNotEmpty()) {
                 conditions += " OR "
             }
             conditions += "(sub_type IN ("
@@ -196,13 +209,23 @@ class MainFragment : BaseFragment() {
             conditions = conditions.substring(0, conditions.length - 1)
             conditions += "))"
         }
+        conditions = "($conditions)"
+        if (colorConditions.isNotEmpty()) {
+            conditions += " AND ($colorConditions)"
+        }
 
-        DBManager.instance.queryCardByCondition(conditions) {
-            it.map { it.convent2CardBean() }.let { list ->
+        if (rarityConditions.isNotEmpty()) {
+            conditions += " AND ($rarityConditions)"
+
+        }
+
+        DBManager.instance.queryCardByCondition(conditions) { cardList ->
+            cardList.map { it.convent2CardBean() }.let { list ->
                 adapter?.datas?.let {
                     it.clear()
                     it.addAll(list)
                     adapter?.notifyDataSetChanged()
+                    rv.scrollToPosition(0)
                 }
 
             }
