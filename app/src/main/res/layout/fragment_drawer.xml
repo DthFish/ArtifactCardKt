@@ -11,14 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/etSearch"
-            android:layout_margin="15dp"
-            android:lines="1"
-            android:hint="@string/str_search_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
         <android.support.v7.widget.AppCompatCheckedTextView
             android:id="@+id/ctvHero"
             style="@style/title_item"

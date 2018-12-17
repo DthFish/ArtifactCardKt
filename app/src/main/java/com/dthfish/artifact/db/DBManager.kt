@@ -128,5 +128,14 @@ class DBManager private constructor() {
             }
     }
 
+    fun queryCardByCondition(condition: String, listener: (MutableList<Card>) -> Unit) {
+        LitePal.where(condition)
+            .order("card_type")
+            .findAsync<Card>()
+            .listen { it ->
+                listener(it)
+            }
+    }
+
 
 }

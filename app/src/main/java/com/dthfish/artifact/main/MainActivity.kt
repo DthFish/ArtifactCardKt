@@ -21,14 +21,8 @@ class MainActivity : BaseActivity() {
 
     }
 
-    fun findHeroes(flag: Boolean) {
-        mainFragment?.findHeroes(flag)
-
-
-    }
-
-    fun gotoSearch(searchBean: SearchBean) {
-
+    fun doSearch(searchBean: SearchBean) {
+        mainFragment?.doSearch(searchBean)
     }
 
 

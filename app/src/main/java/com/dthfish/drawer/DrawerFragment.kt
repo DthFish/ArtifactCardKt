@@ -139,15 +139,16 @@ class DrawerFragment : BaseFragment() {
 
         btnSearch.setOnClickListener {
             SearchBean().apply {
-                this.searchText = etSearch.text.toString()
                 this.types[0] = ctvHero.isChecked
                 this.types[1] = ctvMain.isChecked or ctvCreep.isChecked
                 this.types[2] = ctvMain.isChecked or ctvSpell.isChecked
                 this.types[3] = ctvMain.isChecked or ctvImprovement.isChecked
-                this.types[4] = ctvItem.isChecked or ctvWeapon.isChecked
-                this.types[5] = ctvItem.isChecked or ctvArmor.isChecked
-                this.types[6] = ctvItem.isChecked or ctvAccessory.isChecked
-                this.types[7] = ctvItem.isChecked or ctvConsumable.isChecked
+
+                this.itemTypes[0] = ctvItem.isChecked or ctvWeapon.isChecked
+                this.itemTypes[1] = ctvItem.isChecked or ctvArmor.isChecked
+                this.itemTypes[2] = ctvItem.isChecked or ctvAccessory.isChecked
+                this.itemTypes[3] = ctvItem.isChecked or ctvConsumable.isChecked//Consumable
+                this.itemTypes[4] = ctvItem.isChecked or ctvConsumable.isChecked// deed 归为 Consumable
 
                 this.colors[0] = ctvRed.isChecked
                 this.colors[1] = ctvGreen.isChecked
@@ -159,7 +160,7 @@ class DrawerFragment : BaseFragment() {
                 this.rarities[2] = ctvSilver.isChecked
                 this.rarities[3] = ctvGold.isChecked
 
-                (activity as MainActivity).gotoSearch(this)
+                (activity as MainActivity).doSearch(this)
             }
         }
 

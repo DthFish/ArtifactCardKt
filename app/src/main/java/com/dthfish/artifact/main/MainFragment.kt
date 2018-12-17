@@ -13,7 +13,13 @@ import com.dthfish.artifact.R
 import com.dthfish.artifact.base.BaseFragment
 import com.dthfish.artifact.bean.Card
 import com.dthfish.artifact.bean.CardBean
+import com.dthfish.artifact.bean.SearchBean
+import com.dthfish.artifact.common.log
 import com.dthfish.artifact.db.DBManager
+import com.dthfish.artifact.utils.CARD_TYPE_ARRAY
+import com.dthfish.artifact.utils.CardType
+import com.dthfish.artifact.utils.RARITY_TYPE_ARRAY
+import com.dthfish.artifact.utils.SUB_CARD_TYPE_ARRAY
 import com.liaoinstan.springview.container.DefaultFooter
 import com.zhy.adapter.recyclerview.CommonAdapter
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter
@@ -98,5 +104,110 @@ class MainFragment : BaseFragment() {
                     }
                 }
         }
+    }
+
+    fun doSearch(searchBean: SearchBean) {
+        var types = mutableListOf<String>()
+        var subTypes = mutableListOf<String>()
+        var colors = mutableListOf<String>()
+        var rarities = mutableListOf<String>()
+
+        searchBean.types.forEachIndexed { index, b ->
+            if (b) {
+                types.add(CARD_TYPE_ARRAY[index])
+            }
+        }
+        searchBean.itemTypes.forEachIndexed { index, b ->
+            if (b) {
+                subTypes.add(SUB_CARD_TYPE_ARRAY[index])
+            }
+        }
+
+        searchBean.colors.forEachIndexed { index, b ->
+            if (b) {
+
+            }
+        }
+        searchBean.rarities.forEachIndexed { index, b ->
+            if (b) {
+                if (index == 0) {
+                    rarities.add("IS NULL")
+                } else {
+                    rarities.add(RARITY_TYPE_ARRAY[index])
+                }
+            }
+        }
+        var conditions = ""
+        var ignoreSub = false
+        if (subTypes.size == 5) {
+            types.add(CardType.ITEM)
+            ignoreSub = true
+        } else if (subTypes.isEmpty()) {
+            ignoreSub = true
+        }
+
+        var hasSpell = false
+        var hasImprovement = false
+        // Spell Improvement类型中要去掉 item_def 为空的条目
+        if ((types.isEmpty() && ignoreSub) || types.size == 5) {
+            conditions =
+                    "(card_type IN ('${CardType.HERO}','${CardType.ITEM}','${CardType.CREEP}'))"
+            hasSpell = true
+            hasImprovement = true
+        } else if (types.size == 1 && types[0] == CardType.SPELL) {
+            conditions = "(card_type == '${CardType.SPELL}' AND item_def IS NOT NULL)"
+
+        } else if (types.size == 1 && types[0] == CardType.IMPROVEMENT) {
+            conditions = "(card_type == '${CardType.IMPROVEMENT}' AND item_def IS NOT NULL)"
+
+        } else if (types.size == 2 && types.containsAll(listOf(CardType.IMPROVEMENT, CardType.SPELL))) {
+            conditions = "(card_type IN ('${CardType.IMPROVEMENT}','${CardType.SPELL}') AND item_def IS NOT NULL)"
+
+        } else if(!types.isEmpty()){
+            conditions = "(card_type IN ("
+            types.forEach {
+                when (it) {
+                    CardType.SPELL -> hasSpell = true
+                    CardType.IMPROVEMENT -> hasImprovement = true
+                    else -> conditions += "'$it',"
+                }
+            }
+            conditions = conditions.substring(0, conditions.length - 1)
+            conditions += "))"
+        }
+
+        if (hasSpell) {
+            conditions += " OR (card_type == '${CardType.SPELL}' AND item_def IS NOT NULL)"
+        }
+        if (hasImprovement) {
+            conditions += " OR (card_type == '${CardType.IMPROVEMENT}' AND item_def IS NOT NULL)"
+        }
+
+
+        conditions.log()
+        if (!ignoreSub) {
+            if(!conditions.isEmpty()){
+                conditions += " OR "
+            }
+            conditions += "(sub_type IN ("
+            subTypes.forEach {
+                conditions += "'$it',"
+            }
+            conditions = conditions.substring(0, conditions.length - 1)
+            conditions += "))"
+        }
+
+        DBManager.instance.queryCardByCondition(conditions) {
+            it.map { it.convent2CardBean() }.let { list ->
+                adapter?.datas?.let {
+                    it.clear()
+                    it.addAll(list)
+                    adapter?.notifyDataSetChanged()
+                }
+
+            }
+        }
+
+
     }
 }

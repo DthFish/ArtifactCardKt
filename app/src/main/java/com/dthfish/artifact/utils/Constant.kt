@@ -15,16 +15,23 @@ object CardType {
     const val PASSIVE_ABILITY = "Passive Ability"
 }
 
+val CARD_TYPE_ARRAY = listOf(CardType.HERO, CardType.CREEP, CardType.SPELL, CardType.IMPROVEMENT)
+
 object SubCardType {
     const val WEAPON = "Weapon"
     const val ARMOR = "Armor"
     const val ACCESSORY = "Accessory"
-    const val DEED = "Deed"
     const val CONSUMABLE = "Consumable"
+    const val DEED = "Deed"
 }
+
+val SUB_CARD_TYPE_ARRAY =
+    listOf(SubCardType.WEAPON, SubCardType.ARMOR, SubCardType.ACCESSORY, SubCardType.CONSUMABLE, SubCardType.DEED)
 
 object RarityType {
     const val COMMON = "Common"
     const val UNCOMMON = "Uncommon"
     const val RARE = "Rare"
 }
+
+val RARITY_TYPE_ARRAY = listOf("NULL",RarityType.COMMON,RarityType.UNCOMMON,RarityType.RARE)
