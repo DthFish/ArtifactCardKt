@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.dthfish.artifact.R
 import com.dthfish.artifact.base.BaseActivity
 import com.dthfish.artifact.bean.SearchBean
-import com.dthfish.artifact.drawer.DrawerFragment
+import com.dthfish.artifact.selector.SelectorFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -17,7 +17,7 @@ class MainActivity : BaseActivity() {
         mainFragment = MainFragment.newInstance()
         supportFragmentManager.beginTransaction()
             .add(R.id.fl_container, mainFragment)
-            .add(R.id.fl_menu, DrawerFragment.newInstance())
+            .add(R.id.fl_menu, SelectorFragment.newInstance())
             .commitAllowingStateLoss()
 
     }

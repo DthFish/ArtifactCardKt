@@ -1,4 +1,4 @@
-package com.dthfish.artifact.drawer
+package com.dthfish.artifact.selector
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,23 +8,23 @@ import com.dthfish.artifact.R
 import com.dthfish.artifact.base.BaseFragment
 import com.dthfish.artifact.bean.SearchBean
 import com.dthfish.artifact.main.MainActivity
-import kotlinx.android.synthetic.main.fragment_drawer.*
+import kotlinx.android.synthetic.main.fragment_selector.*
 
 /**
  * Description
  * Author DthFish
  * Date  2018/12/13.
  */
-class DrawerFragment : BaseFragment() {
+class SelectorFragment : BaseFragment() {
     companion object {
-        fun newInstance(): DrawerFragment {
-            return DrawerFragment()
+        fun newInstance(): SelectorFragment {
+            return SelectorFragment()
         }
 
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_drawer, container, false)
+        return inflater.inflate(R.layout.fragment_selector, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
