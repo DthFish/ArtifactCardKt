@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.dthfish.artifact.R
 import com.dthfish.artifact.base.BaseActivity
 import com.dthfish.artifact.bean.SearchBean
-import com.dthfish.drawer.DrawerFragment
+import com.dthfish.artifact.drawer.DrawerFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
