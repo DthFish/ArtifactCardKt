@@ -81,22 +81,22 @@ class MainFragment : BaseFragment() {
 
     }
 
-    fun doSearch(searchBean: SelectBean) {
+    fun doSelect(selectBean: SelectBean) {
         val types = mutableListOf<String>()
         val subTypes = mutableListOf<String>()
 
-        searchBean.types.forEachIndexed { index, b ->
+        selectBean.types.forEachIndexed { index, b ->
             if (b) {
                 types.add(CARD_TYPE_ARRAY[index])
             }
         }
-        searchBean.itemTypes.forEachIndexed { index, b ->
+        selectBean.itemTypes.forEachIndexed { index, b ->
             if (b) {
                 subTypes.add(SUB_CARD_TYPE_ARRAY[index])
             }
         }
         var colorConditions = ""
-        searchBean.colors.forEachIndexed { index, b ->
+        selectBean.colors.forEachIndexed { index, b ->
             if (b) {
                 colorConditions += " OR"
                 when (index) {
@@ -112,7 +112,7 @@ class MainFragment : BaseFragment() {
         }
 
         var rarityConditions = ""
-        searchBean.rarities.forEachIndexed { index, b ->
+        selectBean.rarities.forEachIndexed { index, b ->
             if (b) {
                 rarityConditions += " OR"
                 when (index) {
