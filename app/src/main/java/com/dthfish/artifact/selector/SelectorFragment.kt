@@ -160,7 +160,7 @@ class SelectorFragment : BaseFragment() {
                 this.rarities[2] = ctvSilver.isChecked
                 this.rarities[3] = ctvGold.isChecked
 
-                (activity as MainActivity).doSearch(this)
+                (activity as MainActivity).doSelect(this)
             }
         }
 

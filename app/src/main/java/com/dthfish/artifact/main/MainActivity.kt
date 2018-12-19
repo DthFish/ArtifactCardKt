@@ -22,9 +22,9 @@ class MainActivity : BaseActivity() {
 
     }
 
-    fun doSearch(searchBean: SelectBean) {
+    fun doSelect(selectBean: SelectBean) {
         layoutDrawer.closeDrawers()
-        mainFragment?.doSearch(searchBean)
+        mainFragment?.doSelect(selectBean)
     }
 
 
