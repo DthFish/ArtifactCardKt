@@ -10,9 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.dthfish.artifact.R
 import com.dthfish.artifact.base.BaseFragment
-import com.dthfish.artifact.bean.Card
 import com.dthfish.artifact.bean.CardBean
-import com.dthfish.artifact.bean.SearchBean
+import com.dthfish.artifact.bean.SelectBean
 import com.dthfish.artifact.db.DBManager
 import com.dthfish.artifact.detail.DetailFragment
 import com.dthfish.artifact.utils.*
@@ -21,8 +20,6 @@ import com.zhy.adapter.recyclerview.CommonAdapter
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter
 import com.zhy.adapter.recyclerview.base.ViewHolder
 import kotlinx.android.synthetic.main.fragment_main.*
-import org.litepal.LitePal
-import org.litepal.extension.findAsync
 
 /**
  * Description
@@ -84,24 +81,7 @@ class MainFragment : BaseFragment() {
 
     }
 
-    fun findHeroes(flag: Boolean) {
-        if (flag) {
-            LitePal.where("rarity == ?", "Uncommon")
-                .findAsync<Card>()
-                .listen { it ->
-                    it.map { it.convent2CardBean() }.let { list ->
-                        adapter?.datas?.let {
-                            it.clear()
-                            it.addAll(list)
-                            adapter?.notifyDataSetChanged()
-                        }
-
-                    }
-                }
-        }
-    }
-
-    fun doSearch(searchBean: SearchBean) {
+    fun doSearch(searchBean: SelectBean) {
         val types = mutableListOf<String>()
         val subTypes = mutableListOf<String>()
 

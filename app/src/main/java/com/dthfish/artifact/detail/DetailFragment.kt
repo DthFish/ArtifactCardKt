@@ -2,9 +2,11 @@ package com.dthfish.artifact.detail
 
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.text.Html
 import android.view.*
 import com.dthfish.artifact.R
 import com.dthfish.artifact.bean.CardBean
+import com.dthfish.artifact.utils.CardType
 import com.dthfish.artifact.utils.ImageLoader
 import kotlinx.android.synthetic.main.fragment_detail.*
 
@@ -32,7 +34,7 @@ class DetailFragment : DialogFragment() {
         val dialog = dialog ?: return
         val window = dialog.window ?: return
         val lp = window.attributes
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT
         lp.gravity = Gravity.CENTER
         window.attributes = lp
@@ -47,13 +49,6 @@ class DetailFragment : DialogFragment() {
         }
     }
 
-    /*override fun show(manager: FragmentManager, tag: String) {
-        val ft = manager.beginTransaction()
-        ft.add(this, tag)
-        ft.commitAllowingStateLoss()
-    }*/
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.fragment_detail, container, false)
@@ -65,6 +60,17 @@ class DetailFragment : DialogFragment() {
                 ImageLoader.loadUrl(context!!, it.schinese, iv)
             } else if (!it.default.isNullOrEmpty()) {
                 ImageLoader.loadUrl(context!!, it.default, iv)
+            }
+        }
+        if (CardType.HERO == cardBean.card_type) {
+            cardBean.card_text.let {
+                if (it == null || it.schinese.isNullOrEmpty()) {
+                    tvDesc.visibility = View.GONE
+                } else {
+                    tvDesc.visibility = View.VISIBLE
+                    tvDesc.text = Html.fromHtml(it.schinese)
+                }
+
             }
         }
     }

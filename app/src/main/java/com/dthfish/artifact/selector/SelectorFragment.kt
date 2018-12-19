@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.dthfish.artifact.R
 import com.dthfish.artifact.base.BaseFragment
-import com.dthfish.artifact.bean.SearchBean
+import com.dthfish.artifact.bean.SelectBean
 import com.dthfish.artifact.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_selector.*
 
@@ -138,7 +138,7 @@ class SelectorFragment : BaseFragment() {
         }
 
         btnSearch.setOnClickListener {
-            SearchBean().apply {
+            SelectBean().apply {
                 this.types[0] = ctvHero.isChecked
                 this.types[1] = ctvMain.isChecked or ctvCreep.isChecked
                 this.types[2] = ctvMain.isChecked or ctvSpell.isChecked

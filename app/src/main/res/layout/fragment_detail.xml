@@ -6,16 +6,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.dthfish.artifact.widget.RatioLayout
-        app:ratio="1.69"
+    <RelativeLayout
         android:layout_gravity="center"
-        android:layout_width="240dp"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        <com.dthfish.artifact.widget.RatioLayout
+            android:id="@+id/rl"
+            app:ratio="1.69"
+            android:layout_centerHorizontal="true"
+            android:layout_width="240dp"
+            android:layout_height="match_parent">
 
-    </com.dthfish.artifact.widget.RatioLayout>
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.dthfish.artifact.widget.RatioLayout>
+
+        <TextView
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_below="@id/rl"
+            android:id="@+id/tvDesc"
+            android:textColor="@android:color/white"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
 </FrameLayout>

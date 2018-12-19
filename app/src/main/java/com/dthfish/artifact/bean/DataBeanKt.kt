@@ -144,7 +144,7 @@ class Card(
     }
 }
 
-class SearchBean {
+class SelectBean {
     // 一位代表一个类型，和 ui 位置对应
     //依次 英雄，怪，术，强，
     var types: BooleanArray = booleanArrayOf(false, false, false, false)

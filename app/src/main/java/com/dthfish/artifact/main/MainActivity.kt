@@ -3,7 +3,7 @@ package com.dthfish.artifact.main
 import android.os.Bundle
 import com.dthfish.artifact.R
 import com.dthfish.artifact.base.BaseActivity
-import com.dthfish.artifact.bean.SearchBean
+import com.dthfish.artifact.bean.SelectBean
 import com.dthfish.artifact.selector.SelectorFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,7 +22,7 @@ class MainActivity : BaseActivity() {
 
     }
 
-    fun doSearch(searchBean: SearchBean) {
+    fun doSearch(searchBean: SelectBean) {
         layoutDrawer.closeDrawers()
         mainFragment?.doSearch(searchBean)
     }
