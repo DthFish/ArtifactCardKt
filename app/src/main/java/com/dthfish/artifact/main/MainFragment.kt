@@ -8,23 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.dthfish.artifact.R
 import com.dthfish.artifact.base.BaseFragment
 import com.dthfish.artifact.bean.Card
 import com.dthfish.artifact.bean.CardBean
 import com.dthfish.artifact.bean.SearchBean
 import com.dthfish.artifact.db.DBManager
-import com.dthfish.artifact.utils.CARD_TYPE_ARRAY
-import com.dthfish.artifact.utils.CardType
-import com.dthfish.artifact.utils.RarityType
-import com.dthfish.artifact.utils.SUB_CARD_TYPE_ARRAY
+import com.dthfish.artifact.detail.DetailFragment
+import com.dthfish.artifact.utils.*
 import com.liaoinstan.springview.container.DefaultFooter
 import com.zhy.adapter.recyclerview.CommonAdapter
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter
 import com.zhy.adapter.recyclerview.base.ViewHolder
 import kotlinx.android.synthetic.main.fragment_main.*
-import org.jetbrains.anko.support.v4.toast
 import org.litepal.LitePal
 import org.litepal.extension.findAsync
 
@@ -53,7 +49,7 @@ class MainFragment : BaseFragment() {
         adapter = object : CommonAdapter<CardBean>(context, R.layout.item_card, mutableListOf()) {
             override fun convert(holder: ViewHolder?, bean: CardBean?, position: Int) {
                 holder?.getView<ImageView>(R.id.iv_icon)?.let {
-                    Glide.with(this@MainFragment).load(bean?.mini_image?.default).into(it)
+                    ImageLoader.loadUrl(context!!, bean?.mini_image?.default, it)
                 }
                 holder?.getView<TextView>(R.id.tv_name)?.let {
                     it.text = bean?.card_name?.schinese
@@ -67,9 +63,9 @@ class MainFragment : BaseFragment() {
             }
 
             override fun onItemClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int) {
-                adapter!!.datas[position].apply {
+                adapter!!.datas[position]?.let {
+                    DetailFragment.newInstance(it).show(childFragmentManager!!, "detail")
 
-                    this@MainFragment.toast(this.card_name?.schinese.toString())
                 }
             }
 

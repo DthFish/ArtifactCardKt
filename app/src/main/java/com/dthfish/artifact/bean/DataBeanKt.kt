@@ -54,7 +54,7 @@ data class CardBean(
     var rarity: String?,
     var item_def: Int?,
     var references: List<ReferencesBean>?
-) {
+):Serializable {
     fun convertToCard(): Card {
 
         return Card(
