@@ -137,7 +137,7 @@ class SelectorFragment : BaseFragment() {
             ctvGold.toggle()
         }
 
-        btnSearch.setOnClickListener {
+        btnSelect.setOnClickListener {
             SelectBean().apply {
                 this.types[0] = ctvHero.isChecked
                 this.types[1] = ctvMain.isChecked or ctvCreep.isChecked

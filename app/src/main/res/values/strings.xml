@@ -4,6 +4,7 @@
     <string name="str_hero">英雄</string>
     <string name="str_main_card">主牌组</string>
     <string name="str_item">物品</string>
+    <string name="str_select">筛选</string>
     <string name="str_search">搜索</string>
     <string name="str_color">颜色</string>
     <string name="str_rarity">稀有度</string>

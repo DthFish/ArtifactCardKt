@@ -215,8 +215,8 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnSearch"
-            android:text="@string/str_search"
+            android:id="@+id/btnSelect"
+            android:text="@string/str_select"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_width="match_parent"
