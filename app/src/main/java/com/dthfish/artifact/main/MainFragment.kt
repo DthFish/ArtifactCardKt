@@ -72,15 +72,10 @@ class MainFragment : BaseFragment() {
         springView.isEnableFooter = true
         // 装作我在用分页加载的样子（滑稽）
         springView.footer = DefaultFooter(context)
-        DBManager.instance.queryAllCard { it ->
-            it.map { it.convent2CardBean() }.let {
-                adapter!!.datas.addAll(it)
-                adapter!!.notifyDataSetChanged()
-            }
-        }
+        doSelect(SelectBean())// 默认
 
     }
-
+    // 筛选掉了很多构建里面不能选择的但是 json 里有的数据，搜索的时候就不去除这部分数据了
     fun doSelect(selectBean: SelectBean) {
         val types = mutableListOf<String>()
         val subTypes = mutableListOf<String>()
@@ -139,39 +134,46 @@ class MainFragment : BaseFragment() {
 
         var hasSpell = false
         var hasImprovement = false
-        // Spell Improvement类型中要去掉 item_def 为空的条目
+        var hasCreep = false
+        // Spell Improvement Creep类型中要去掉 item_def 为空的条目
         if ((types.isEmpty() && ignoreSub) || types.size == 5) {
             conditions =
-                    "(card_type IN ('${CardType.HERO}','${CardType.ITEM}','${CardType.CREEP}'))"
+                    "(card_type IN ('${CardType.HERO}','${CardType.ITEM}'))"
             hasSpell = true
             hasImprovement = true
-        } else if (types.size == 1 && types[0] == CardType.SPELL) {
-            conditions = "(card_type == '${CardType.SPELL}' AND item_def IS NOT NULL)"
-
-        } else if (types.size == 1 && types[0] == CardType.IMPROVEMENT) {
-            conditions = "(card_type == '${CardType.IMPROVEMENT}' AND item_def IS NOT NULL)"
-
-        } else if (types.size == 2 && types.containsAll(listOf(CardType.IMPROVEMENT, CardType.SPELL))) {
-            conditions = "(card_type IN ('${CardType.IMPROVEMENT}','${CardType.SPELL}') AND item_def IS NOT NULL)"
-
+            hasCreep = true
         } else if (!types.isEmpty()) {
-            conditions = "(card_type IN ("
             types.forEach {
                 when (it) {
                     CardType.SPELL -> hasSpell = true
                     CardType.IMPROVEMENT -> hasImprovement = true
-                    else -> conditions += "'$it',"
+                    CardType.CREEP -> hasCreep = true
+                    else -> conditions += if (conditions.isNotEmpty()) "'$it'," else "(card_type IN ('$it',"
                 }
             }
-            conditions = conditions.substring(0, conditions.length - 1)
-            conditions += "))"
+            if (conditions.isNotEmpty()) {
+                conditions = conditions.substring(0, conditions.length - 1)
+                conditions += "))"
+            }
         }
 
         if (hasSpell) {
-            conditions += " OR (card_type == '${CardType.SPELL}' AND item_def IS NOT NULL)"
+            if (conditions.isNotEmpty()) {
+                conditions += " OR "
+            }
+            conditions += "(card_type == '${CardType.SPELL}' AND item_def IS NOT NULL)"
         }
         if (hasImprovement) {
-            conditions += " OR (card_type == '${CardType.IMPROVEMENT}' AND item_def IS NOT NULL)"
+            if (conditions.isNotEmpty()) {
+                conditions += " OR "
+            }
+            conditions += "(card_type == '${CardType.IMPROVEMENT}' AND item_def IS NOT NULL)"
+        }
+        if (hasCreep) {
+            if (conditions.isNotEmpty()) {
+                conditions += " OR "
+            }
+            conditions += "(card_type == '${CardType.CREEP}' AND item_def IS NOT NULL)"
         }
 
         if (!ignoreSub) {
@@ -196,15 +198,19 @@ class MainFragment : BaseFragment() {
         }
 
         DBManager.instance.queryCardByCondition(conditions) { cardList ->
-            cardList.map { it.convent2CardBean() }.let { list ->
-                adapter?.datas?.let {
-                    it.clear()
-                    it.addAll(list)
-                    adapter?.notifyDataSetChanged()
-                    rv.scrollToPosition(0)
-                }
 
-            }
+            cardList.asSequence()
+                //治疗药膏,泉水烧瓶,知识魔药,回城卷轴 用 sql 比较难去掉所以这里用 filter
+                .filter { (SubCardType.CONSUMABLE == it.sub_type && it.rarity.isNullOrEmpty()).not() }
+                .map { it.convent2CardBean() }.toList().let { list ->
+                    adapter?.datas?.let {
+                        it.clear()
+                        it.addAll(list)
+                        adapter?.notifyDataSetChanged()
+                        rv.scrollToPosition(0)
+                    }
+
+                }
         }
 
 
