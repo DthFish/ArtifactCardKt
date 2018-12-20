@@ -38,6 +38,7 @@ val RARITY_TYPE_ARRAY = listOf("NULL", RarityType.COMMON, RarityType.UNCOMMON, R
 
 object RefType {
     const val INCLUDES = "includes"
+    const val REFERENCES = "references"
     const val PASSIVE_ABILITY = "passive_ability"
     const val ACTIVE_ABILITY = "active_ability"
 }

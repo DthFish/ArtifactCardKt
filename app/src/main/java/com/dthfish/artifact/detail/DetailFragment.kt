@@ -118,7 +118,7 @@ class DetailFragment : DialogFragment() {
         cardBean.references.let { list ->
             var conditions = ""
             if (!list.isNullOrEmpty()) {
-                list!!.filter { RefType.INCLUDES == it.ref_type }.forEach { ref ->
+                list!!.filter { RefType.INCLUDES == it.ref_type || RefType.REFERENCES == it.ref_type }.forEach { ref ->
 
                     if (conditions.isEmpty()) {
                         conditions = "(" + ref.card_id
