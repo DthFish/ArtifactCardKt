@@ -30,6 +30,7 @@ data class ImageBean(var default: String?, var english: String?, var schinese: S
 
 @JsonClass(generateAdapter = true)
 data class ReferencesBean(var card_id: Int, var ref_type: String?, var count: Int?) : Serializable
+// ref_type:includes,passive_ability(被动),active_ability(主动)
 
 @JsonClass(generateAdapter = true)
 data class CardBean(

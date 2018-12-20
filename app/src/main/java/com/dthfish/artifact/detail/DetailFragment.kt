@@ -2,12 +2,19 @@ package com.dthfish.artifact.detail
 
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.support.v7.widget.LinearLayoutManager
 import android.text.Html
 import android.view.*
+import android.widget.ImageView
+import android.widget.TextView
 import com.dthfish.artifact.R
 import com.dthfish.artifact.bean.CardBean
+import com.dthfish.artifact.db.DBManager
 import com.dthfish.artifact.utils.CardType
 import com.dthfish.artifact.utils.ImageLoader
+import com.dthfish.artifact.utils.RefType
+import com.zhy.adapter.recyclerview.CommonAdapter
+import com.zhy.adapter.recyclerview.base.ViewHolder
 import kotlinx.android.synthetic.main.fragment_detail.*
 
 /**
@@ -17,6 +24,8 @@ import kotlinx.android.synthetic.main.fragment_detail.*
  */
 class DetailFragment : DialogFragment() {
     private lateinit var cardBean: CardBean
+    private val cardBeans = mutableListOf<CardBean>()
+    private var adapter: CommonAdapter<CardBean>? = null
 
     companion object {
         fun newInstance(cardBean: CardBean): DetailFragment {
@@ -55,23 +64,79 @@ class DetailFragment : DialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        cardBean.large_image?.let {
-            if (!it.schinese.isNullOrEmpty()) {
-                ImageLoader.loadUrl(context!!, it.schinese, iv)
-            } else if (!it.default.isNullOrEmpty()) {
-                ImageLoader.loadUrl(context!!, it.default, iv)
-            }
-        }
-        if (CardType.HERO == cardBean.card_type) {
-            cardBean.card_text.let {
-                if (it == null || it.schinese.isNullOrEmpty()) {
-                    tvDesc.visibility = View.GONE
-                } else {
-                    tvDesc.visibility = View.VISIBLE
-                    tvDesc.text = Html.fromHtml(it.schinese)
+        rvDetail.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        adapter = object : CommonAdapter<CardBean>(context, R.layout.item_card_detail, cardBeans) {
+            override fun convert(holder: ViewHolder?, bean: CardBean?, position: Int) {
+                holder?.getView<ImageView>(R.id.iv)?.let { iv ->
+                    bean?.large_image?.let {
+                        if (!it.schinese.isNullOrEmpty()) {
+                            ImageLoader.loadUrl(context!!, it.schinese, iv)
+                        } else if (!it.default.isNullOrEmpty()) {
+                            ImageLoader.loadUrl(context!!, it.default, iv)
+                        }
+                    }
                 }
+                holder?.getView<TextView>(R.id.tvDesc)?.let { tvDesc ->
+                    if (CardType.HERO == bean?.card_type) {
+                        bean.card_text.let {
+                            if (it == null || it.schinese.isNullOrEmpty()) {
+
+                                tvDesc.visibility = View.GONE
+                            } else {
+                                tvDesc.visibility = View.VISIBLE
+                                tvDesc.text = Html.fromHtml(it.schinese)
+                            }
+                        }
+                    } else {
+                        tvDesc.visibility = View.GONE
+                    }
+                }
+
 
             }
         }
+        rvDetail.adapter = adapter
+
+        cardBeans.add(cardBean)
+
+        cardBean.references.let { list ->
+            var conditions = ""
+            if (!list.isNullOrEmpty()) {
+                list!!.filter { RefType.INCLUDES == it.ref_type }.forEach { ref ->
+
+                    if (conditions.isEmpty()) {
+                        conditions = "(" + ref.card_id
+
+                    } else {
+                        conditions += "," + ref.card_id
+                    }
+                }
+                if (conditions.isNotEmpty()) {
+                    conditions += ")"
+                }
+            }
+
+            if (conditions.isNotEmpty()) {
+                DBManager.instance.queryCardByCondition("card_id IN $conditions") { cards ->
+                    if (!cards.isNullOrEmpty()) {
+                        cards.map { it.convent2CardBean() }.let { cardBeanList ->
+                            cardBeans.addAll(cardBeanList)
+
+                        }
+                    }
+                    showDetail(cardBeans)
+                }
+            } else {
+                showDetail(cardBeans)
+            }
+        }
+
+
+    }
+
+    private fun showDetail(cardBeans: MutableList<CardBean>) {
+        adapter?.notifyDataSetChanged()
+
     }
 }

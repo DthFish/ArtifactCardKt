@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:gravity="center_horizontal"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
+    <com.dthfish.artifact.widget.RatioLayout
+        android:id="@+id/rl"
+        app:ratio="1.69"
+
+        android:layout_width="240dp"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.dthfish.artifact.widget.RatioLayout>
+
+    <TextView
+        android:visibility="gone"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:id="@+id/tvDesc"
+        android:textColor="@android:color/white"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

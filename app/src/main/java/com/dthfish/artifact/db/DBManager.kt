@@ -22,7 +22,7 @@ import java.io.InputStreamReader
 
 /**
  * Description
- * Author zhaolizhi
+ * Author DthFish
  * Date  2018/12/13.
  */
 class DBManager private constructor() {
@@ -121,6 +121,7 @@ class DBManager private constructor() {
 
     fun queryAllCard(listener: (MutableList<Card>) -> Unit) {
         LitePal.where("card_type IN ('${CardType.HERO}','${CardType.ITEM}','${CardType.SPELL}','${CardType.IMPROVEMENT}','${CardType.CREEP}')")
+//        LitePal.where("card_type IN ('${CardType.ABILITY}','${CardType.PASSIVE_ABILITY}')")
             .order("card_type")
             .findAsync<Card>()
             .listen { it ->

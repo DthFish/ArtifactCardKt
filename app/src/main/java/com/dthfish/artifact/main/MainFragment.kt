@@ -42,7 +42,7 @@ class MainFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         adapter = object : CommonAdapter<CardBean>(context, R.layout.item_card, mutableListOf()) {
             override fun convert(holder: ViewHolder?, bean: CardBean?, position: Int) {
                 holder?.getView<ImageView>(R.id.iv_icon)?.let {

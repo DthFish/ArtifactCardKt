@@ -34,4 +34,10 @@ object RarityType {
     const val RARE = "Rare"
 }
 
-val RARITY_TYPE_ARRAY = listOf("NULL",RarityType.COMMON,RarityType.UNCOMMON,RarityType.RARE)
+val RARITY_TYPE_ARRAY = listOf("NULL", RarityType.COMMON, RarityType.UNCOMMON, RarityType.RARE)
+
+object RefType {
+    const val INCLUDES = "includes"
+    const val PASSIVE_ABILITY = "passive_ability"
+    const val ACTIVE_ABILITY = "active_ability"
+}
