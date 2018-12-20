@@ -1,8 +1,11 @@
 package com.dthfish.artifact.detail
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.PagerSnapHelper
+import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.view.*
 import android.widget.ImageView
@@ -16,6 +19,7 @@ import com.dthfish.artifact.utils.RefType
 import com.zhy.adapter.recyclerview.CommonAdapter
 import com.zhy.adapter.recyclerview.base.ViewHolder
 import kotlinx.android.synthetic.main.fragment_detail.*
+import org.jetbrains.anko.support.v4.dip
 
 /**
  * Description
@@ -97,6 +101,17 @@ class DetailFragment : DialogFragment() {
             }
         }
         rvDetail.adapter = adapter
+        rvDetail.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect?,
+                view: View?,
+                parent: RecyclerView?,
+                state: RecyclerView.State?
+            ) {
+                outRect?.set(dip(5), 0, dip(5), 0)
+            }
+        })
+        PagerSnapHelper().attachToRecyclerView(rvDetail)
 
         cardBeans.add(cardBean)
 
