@@ -5674,8 +5674,8 @@
           "italian": "<span style='font-weight:bold;color:#ffffff;'>Fedeli</span><br/>Evoca un <span style='font-weight:bold;color:#ffffff;'>Creep da mischia</span> nella corsia di Prellex a ogni fase di schieramento.",
           "koreana": "<span style='font-weight:bold;color:#ffffff;'>신도들의 인도자</span><br/>배치 단계마다 프렐렉스의 전선에 <span style='font-weight:bold;color:#ffffff;'>근접 크립</span> 하나를 소환합니다.",
           "spanish": "<span style='font-weight:bold;color:#ffffff;'>Invocación de los fieles<</span><br/>Invoca a un <span style='font-weight:bold;color:#ffffff;'>críptido de melé</span> en la senda de Prélex en cada fase de despliegue.",
-          "schinese": "<span style='font-weight:bold;color:#ffffff;'>信仰使者</span><br/>g:204部署阶段，召唤一名<span style='font-weight:bold;color:#ffffff;'>近战小兵</span>至普瑞蕾斯的兵线。",
-          "tchinese": "<span style='font-weight:bold;color:#ffffff;'>信仰使者</span><br/>g:204部署階段，召喚一名<span style='font-weight:bold;color:#ffffff;'>近戰小兵</span>至普瑞蕾斯的兵線。",
+          "schinese": "<span style='font-weight:bold;color:#ffffff;'>信仰使者</span><br/>部署阶段，召唤一名<span style='font-weight:bold;color:#ffffff;'>近战小兵</span>至普瑞蕾斯的兵线。",
+          "tchinese": "<span style='font-weight:bold;color:#ffffff;'>信仰使者</span><br/>部署階段，召喚一名<span style='font-weight:bold;color:#ffffff;'>近戰小兵</span>至普瑞蕾斯的兵線。",
           "russian": "<span style='font-weight:bold;color:#ffffff;'>Вестница веры</span><br/><span style='font-weight:bold;color:#ffffff;'>Преллекс</span> призывает <span style='font-weight:bold;color:#ffffff;'>крипа-мечника</span> на свою линию в каждую фазу размещения.",
           "thai": "<span style='font-weight:bold;color:#ffffff;'>Bringer of the Faithful</span><br/>Summon a <span style='font-weight:bold;color:#ffffff;'>Melee Creep</span> into Prellex's lane each deployment phase.",
           "japanese": "<span style='font-weight:bold;color:#ffffff;'>忠誠者の導き手</span><br/>各配置フェイズでプレレックスのレーンに<span style='font-weight:bold;color:#ffffff;'>近接クリープ</span>1体を召喚する。",
@@ -7234,6 +7234,9 @@
           "vietnamese": "Zeus"
         },
         "card_text": {
+          "english": "<span style='font-weight:bold;color:#ffffff;'>Static Field</span><br/>Deal 1 piercing damage to Zeus's enemy neighbors after you play a <span style='font-weight:bold;color:#2f7492;'>blue spell</span>.",
+          "schinese": "<span style='font-weight:bold;color:#ffffff;'>静电场</span><br/>打出一张<span style='font-weight:bold;color:#2f7492;'>蓝色法术</span>后，对宙斯的敌方近邻造成1透甲伤害。",
+          "tchinese": "<span style='font-weight:bold;color:#ffffff;'>靜電力場</span><br/>打出一張<span style='font-weight:bold;color:#2f7492;'>藍色法術</span>後，對宙斯的敵方近鄰造成1透甲傷害。"
         },
         "mini_image": {
           "default": "https://steamcdn-a.akamaihd.net/apps/583950/icons/set01/10065.de19a6f1e68cfcab2f38f25b3d8847866ba87ccb.png"

@@ -8,7 +8,10 @@ import org.litepal.crud.LitePalSupport
 import java.io.Serializable
 
 /**
- * Description
+ * Description 对 json 文件做的修改:
+ * 1.Pathing （线路 删除）,Stronghold（删除）
+ * 2.card_id 10053 card_text 里的 schinese tchinese 描述
+ * 3.card_id 10065 缺少 card_text 从 card_id 10519 复制（宙斯缺少静电力场的描述）
  * Author DthFish
  * Date  2018/12/6.
  */
