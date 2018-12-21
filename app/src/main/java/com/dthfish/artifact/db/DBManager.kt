@@ -122,7 +122,7 @@ class DBManager private constructor() {
     fun queryAllCard(listener: (MutableList<Card>) -> Unit) {
         LitePal.where("card_type IN ('${CardType.HERO}','${CardType.ITEM}','${CardType.SPELL}','${CardType.IMPROVEMENT}','${CardType.CREEP}')")
 //        LitePal.where("card_type IN ('${CardType.ABILITY}','${CardType.PASSIVE_ABILITY}')")
-            .order("card_type")
+            .order("order_id desc,is_red desc,is_green desc,is_blue desc,is_black desc")
             .findAsync<Card>()
             .listen { it ->
                 listener(it)
@@ -131,7 +131,7 @@ class DBManager private constructor() {
 
     fun queryCardByCondition(condition: String, listener: (MutableList<Card>) -> Unit) {
         LitePal.where(condition)
-            .order("card_type")
+            .order("order_id desc,is_red desc,is_green desc,is_blue desc,is_black desc")
             .findAsync<Card>()
             .listen { it ->
                 listener(it)

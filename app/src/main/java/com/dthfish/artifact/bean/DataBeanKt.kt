@@ -2,6 +2,8 @@ package com.dthfish.artifact.bean
 
 import com.dthfish.artifact.common.b2o
 import com.dthfish.artifact.common.o2b
+import com.dthfish.artifact.utils.CardType
+import com.dthfish.artifact.utils.SubCardType
 import com.squareup.moshi.JsonClass
 import org.litepal.annotation.Column
 import org.litepal.crud.LitePalSupport
@@ -59,7 +61,7 @@ data class CardBean(
     var rarity: String?,
     var item_def: Int?,
     var references: List<ReferencesBean>?
-):Serializable {
+) : Serializable {
     fun convertToCard(): Card {
 
         return Card(
@@ -117,6 +119,27 @@ class Card(
 ) : LitePalSupport(), Serializable {
     @Column(unique = true)
     var id: Int? = 0
+    var order_id: Int = 0
+
+    init {
+        order_id = when (card_type) {
+            CardType.HERO -> 10
+            CardType.CREEP -> 9
+            CardType.SPELL -> 8
+            CardType.IMPROVEMENT -> 7
+            CardType.ITEM -> when (sub_type) {
+                SubCardType.WEAPON -> 6
+                SubCardType.ARMOR -> 5
+                SubCardType.ACCESSORY -> 4
+                SubCardType.CONSUMABLE -> 3
+                SubCardType.DEED -> 2
+                else -> 2
+            }
+            CardType.ABILITY -> 1
+            CardType.PASSIVE_ABILITY -> 0
+            else -> 0
+        }
+    }
 
     fun convent2CardBean(): CardBean {
         return CardBean(
