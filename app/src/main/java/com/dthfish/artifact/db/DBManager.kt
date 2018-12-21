@@ -53,7 +53,7 @@ class DBManager private constructor() {
 
         val find = LitePal.findFirst<Card>()
         if (find == null) {
-            Observable.just("card_set_1.json", "card_set_2.json")
+            Observable.just("card_set_1.json", "card_set_3.json")
                 .flatMap { s ->
                     Observable.create<Int> { emitter ->
                         parseJsonAndSave(s)
